@@ -6,7 +6,7 @@ def normalize_sql(sql):
     return ' '.join(sql.strip().split()).lower()
 
 
-def parse(raw_sql):
+def parse_create(raw_sql):
     result = {}
     sql = normalize_sql(raw_sql)
     match = constants.REGX_CREATE.match(sql)
@@ -36,12 +36,11 @@ def parse(raw_sql):
         'primary_key': primary_key,
         'columns': column_def,
     }
-    __import__('pudb').set_trace()
     return result
 
 
 def main():
-    result = parse(sql_statements.SQL_CREATE)
+    result = parse_create(sql_statements.SQL_CREATE)
     print(result)
 
 
